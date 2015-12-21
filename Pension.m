@@ -1,4 +1,4 @@
-function [ Cp,S ] = Pension( tp,P )
+function [ Cp,S ] = Pension( tp,P,r )
 %Calculates Pot and Cost in period i
 
 % Takes current pension pot S, adds tax rev for pension use, tp.
@@ -15,7 +15,7 @@ If Cp > S
 %remainder.
 Else 
     S = S-Cp;
-    S = S*1.05;
+    S = S*1+r;
 end
 
 end
