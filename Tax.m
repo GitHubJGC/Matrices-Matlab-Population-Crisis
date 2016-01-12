@@ -1,10 +1,11 @@
-function [tp] = Tax(t,p)
+function [tZ] = Tax(t,WP)
 
-%tax revenue from population
+%tax revenue from Population
 
 t = zeros(1,10);
-t(3:7)=10;
+t(3:7)=100;
 
-tp=(p*t);
+Z=diag(WP);
+tZ=(t*Z);
 
 end
