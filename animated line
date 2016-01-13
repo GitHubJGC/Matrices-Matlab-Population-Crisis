@@ -1,0 +1,12 @@
+h = animatedline;
+axis([0,T,0,100000000])
+title('UK population growth chart')
+xlabel('age groups')
+ylabel('Population(100 millions)')
+
+x = (0:1:T);
+y = z6;
+for k = 1:length(x)
+    addpoints(h,x(k),y(k));
+    drawnow
+end
