@@ -1,0 +1,44 @@
+Economic Analysis with Matrices group project-Report
+What is the code about?
+Our Matlab code is a complex simulation of a population over time involving realistic data, a user acting as the government (i.e. making spending decisions) and the occurrence of crises. 
+Initially, before any code was written we had to design our own economy which therefore required finding relevant data and also defining a list of assumptions in order to create a realistic yet not overly complicated simulation. 
+Assumptions:
+	We have created our own economy, but the data is based on the UK therefore we will refer to our country as ‘The UK’
+	There are 10 age categories ranging from 0-10 up to 90-100, we assume nobody lives past 100 
+	The Government only receives revenue from lump sum income tax, and its only spending each period is on pensions, healthcare and education.
+	The simulation runs for n amount of periods, with each period representing 10 years. 
+	We use a Leslie matrix to show the evolution of the population. We assume no immigration and emigration
+	Birth rates are constant throughout however survival rates and employment levels can vary depending on user choices
+	People in the age groups 20-69 pay a fixed tax if they are employed.
+	Pensions are paid out to those over the age of 70 at a fixed rate of 20 per person. Pensions are the first priority of spending.
+So what actually happens?
+Our code begins with a series of questions. The user will choose how many periods they wish to run the simulation for (each period is worth 10 years), how they would like to split their spending between healthcare and education (e.g. 50%/50% or 100%/0%) and how often they wish to interact in the simulation to adjust these spending preferences. 
+Firstly, the code takes the UK population from 2014 along with a Leslie matrix, constructed from 2014 birth and life expectancy rates. Every year, a lump sum tax of 100 is taken from the age groups 20-69 of which 20 will then be spent per person on pensions for those aged 70+. After this number is taken away from total revenue, the remainder is split between healthcare and education. 
+Depending on how this is split, it will select a Leslie matrix and an education matrix from a set of matrices we have created. It is best explained with an example, if the user chooses 100% spending on healthcare and 0% on education, the code will choose the ‘Best’ Leslie matrix (from a list) with the most improved survival rates, along with the ‘Worst’ education matrix (which will have lower unemployment rates as opposed to if they spent 100% on education). 
+
+
+At the end of each period, Matlab will check whether certain conditions are met: 
+1)	Pension Crisis: Tax revenue must be greater than the funds needed to pay-out pensions each period
+2)	Healthcare/Education crisis (standard of living): Spending per person (Total revenue/total population) must be greater than 25 each period.
+3)	Population Crisis: population level must not fall below 50% of the initial population size
+If these conditions are not satisfied, an error message will occur and the simulation will stop. In reality, with pensions being first priority of spending and populations continuously growing, (1) and (3) shouldn’t occur often, if at all.
+Once the simulation has finished, a window will appear containing 4 graphs. These graphs are self-explanatory with accompanying headings and legends. 
+
+
+Running the code:
+Here are step by step instructions:
+1)	Firstly, load the zip file into Matlab. There are multiple functions and scripts, however the user will only need to run the ‘Master’ script.
+2)	Run the Master script
+3)	The first question will ask how many periods you wish to run for. Each period is worth 10 years. Choose any number you wish. We recommended between 1 and 50, as large values may become unrealistic to predict.
+4)	The second question will ask how much (as a %) you would like to spend on education and healthcare. Input a number between 0 and 100 for healthcare and the rest will be allocated to education. A good idea would be to try extreme cases for comparison, e.g. 0:100 or 100:0.
+5)	The third question asks the user how often they would like to intervene and redefine the spending split. For example, if the user ran the simulation for 20 periods and inputted ‘10’ for question 3, they would redefine the spending every 2 periods. If they chose 0 for question 3, they would only get to choose spending once (at the very beginning). We recommend choosing 0 (no interaction) for your first run, to get a feel for how it works.
+6)	A pop-up window including 4 graphs will display results depending on the inputs.
+
+
+
+
+
+
+Process: We met several times before the Christmas break to set out our project and create a detailed plan of everything we would need throughout our project, from data collection to coding and writing our report. We used various communication methods including Whatsapp, Skype and Github. We met weekly on Skype to assess our progress, and set out our individuals tasks, before regrouping and uploading our code to GitHub (This is similar to google drive, but for coding). Once back at university, we then met up (almost daily) to merge our work together and code the master script. 
+
+Mark Split: As a group we have decided to split the marks evenly. Although within the group we all have varied levels of competency with Matlab, everyone was involved at every stage of the decision making process. 
