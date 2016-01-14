@@ -12,6 +12,18 @@ EducHealth;
 y = length(p);
 X = zeros(y,n+1);
 X(:,1)= p;
+
+SPPM = zeros(1,n+1);
+
+i = input('Choose how often you would like to change the health/educ ratio');
+
+if i ~=0:n
+    display 'must be a number from 0 to n'
+    
+else
+end
+
+
 %c=0;
 
 for j = 1:n
@@ -26,7 +38,36 @@ X(:,j+1) = HC*X(:,j);
 
 X1 = X;
 
-hold on
-plot(j,SPP,'r-*');
+SPPM(:,j+1)= SPP
+
+if rem(j,i) ~= 0
+    
+    if i == 0
+    else
+    Choice;
+    end    
+else
 end
+
+end
+
+PT = sum(X);
+
+proportion;
+
+
+figure;
+subplot(2,2,1);
+plot(0:1:n,PT);
+title('Graph 1: Total population in each period');
+
+subplot(2,2,2);
+plot(0:1:n,SPPM,'r-*');
+title('Graph 2: Spending per person after pension costs in each period');
+
+subplot(2,2,3);
+bar(q);
+title('Graph 3: Propotion of total population per age group');
+
+%subplot(2,2,2);
 %%
