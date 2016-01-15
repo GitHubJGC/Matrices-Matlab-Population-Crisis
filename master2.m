@@ -1,5 +1,8 @@
-
 function bar
+
+clear
+clc
+
  p0 = [8526771 ; 7557820 ; 8785158 ; 8268385 ; 9237335 ; 8009998 ; 7105642 ; 4457176 ; 2325484 ; 322983]
 
 Health0v100 =[0 0.1402	0.9128	0.7221	0.052	0.0029 0	0	0	0;
@@ -169,10 +172,10 @@ maxtext = uicontrol('Style','text','Position',[500 0 60 20],'String','Healthcare
 % Make figure visble after adding all components
 
 %2015a friendly code
-    % f.Visible = 'on';
+    %f.Visible = 'on';
     
 %2014a friendly code
-set(f,'Visible','on')
+    set(f,'Visible','on')
     
 function plot(sld,callbackdata)
        val =  get(sld,'Value');
