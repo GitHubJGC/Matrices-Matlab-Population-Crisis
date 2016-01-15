@@ -1,10 +1,12 @@
 function bar
-
+%House keeping rules
 clear
 clc
-
- p0 = [8526771 ; 7557820 ; 8785158 ; 8268385 ; 9237335 ; 8009998 ; 7105642 ; 4457176 ; 2325484 ; 322983]
-
+%Initial population in uk acording to each age group
+ p0 = [8526771 ; 7557820 ; 8785158 ; 8268385 ; 9237335 ; 8009998 ; 7105642 ; 4457176 ; 2325484 ; 322983];
+%Eleven different leslie matricies according to the amount of spending on
+%health care and education which is used as an input as the user moves the
+%slider.
 Health0v100 =[0 0.1402	0.9128	0.7221	0.052	0.0029 0	0	0	0;
 0.98	0	0	0	0	0	0	0	0	0;
 0	0.97	0	0	0	0	0	0	0	0;
@@ -124,27 +126,32 @@ Health100v0 =[0 0.1402	0.9128	0.7221	0.052	0.0029 0	0	0	0;
 0	0	0	0	0	0.996	0	0	0	0;
 0	0	0	0	0	0	0.99	0	0	0;
 0	0	0	0	0	0	0	0.95	0	0;
-0	0	0	0	0	0	0	0	0.94	0]
-
+0	0	0	0	0	0	0	0	0.94	0];
+%An input option that allows the user to choose how long they wish to
+%simulate it for.
 for T = input ('enter the amount of Periods(1=10years)you would like to simulate the population for:  ');
 end
-IN=p0
-AGE=[1 2 3 4 5 6 7 8 9 10]
-
-z1=Popsimu(Health0v100,T,IN)
-z2=Popsimu(Health10v90,T,IN)
-z3=Popsimu(Health20v80,T,IN)
-z4=Popsimu(Health30v70,T,IN)
-z5=Popsimu(Health40v60,T,IN)
-z6=Popsimu(Health50v50,T,IN)
-z7=Popsimu(Health60v40,T,IN)
-z8=Popsimu(Health70v30,T,IN)
-z9=Popsimu(Health80v20,T,IN)
-z10=Popsimu(Health90v10,T,IN)
-z11=Popsimu(Health100v0,T,IN)
-% Create a figure and axes
+%Changes the initial population to an IN variable used in the popsimu
+%function as an input.
+IN=p0;
+%the different age groups in the economy
+AGE=[1 2 3 4 5 6 7 8 9 10];
+%the list of the different simulations according to the spending chosen to
+%make it neat.
+z1=Popsimu(Health0v100,T,IN);
+z2=Popsimu(Health10v90,T,IN);
+z3=Popsimu(Health20v80,T,IN);
+z4=Popsimu(Health30v70,T,IN);
+z5=Popsimu(Health40v60,T,IN);
+z6=Popsimu(Health50v50,T,IN);
+z7=Popsimu(Health60v40,T,IN);
+z8=Popsimu(Health70v30,T,IN);
+z9=Popsimu(Health80v20,T,IN);
+z10=Popsimu(Health90v10,T,IN);
+z11=Popsimu(Health100v0,T,IN);
+% Create a figure that appears first in a figure as its run
     f = figure('Visible','off');
-    
+ %Subplot the Population growth according to 50v50 spending 
     positionVector1 = [0.5, 0.1, 0.4, 0.7];
 subplot('Position',positionVector1)
 
@@ -153,19 +160,19 @@ subplot('Position',positionVector1)
 xlabel('Periods')
 ylabel('age groups')
 zlabel('Population(millions)')
-
+%subplots the pie chart which displays the amount of spend in each sector.
 positionVector2 = [0.1, 0.2, 0.3, 0.3];;
 subplot('Position',positionVector2)
-x=[0.5 0.5]
+x=[0.5 0.5];
 pie(x)
 legend('Education','Healthcare')
 
 
 
 
-     
-sld = uicontrol('Style', 'slider','min',0,'max',10,'Value',5,'Position', [380 0 120 20],...
-'Callback', @plot,'SliderStep', [1/10 1]); %the @plot is the function of education and healthcare,
+  %Creates a slider which has 11 steps for which a different lesile matrix is assigned   
+sld = uicontrol('Style', 'slider','min',0,'max',10,'Value',5,'Position', [380 0 120 20],'Callback', @plot,'SliderStep', [1/10 1]); %the @plot is the function of education and healthcare,
+%creates a min and max text 
 mintext = uicontrol('Style','text','Position',[325 0 50 20],'String','Education');
 maxtext = uicontrol('Style','text','Position',[500 0 60 20],'String','Healthcare');
 
@@ -175,14 +182,14 @@ maxtext = uicontrol('Style','text','Position',[500 0 60 20],'String','Healthcare
     %f.Visible = 'on';
     
 %2014a friendly code
-    set(f,'Visible','on')
-    
-function plot(sld,callbackdata)
+    set(f,'Visible','on');
+   %a function that takes the value from the slider and plots the population growth according to the spending chosen 
+function plot(sld,callbackdata);
        val =  get(sld,'Value');
        
-
+%a string that shows the value from the slider
 uicontrol('Style', 'text', 'String', num2str(val),'Position', [270 0 50 20]);
-        
+ %a loop that plots pie and bar chart according to the value which has an assigned spending lesile matrix.       
 if val==5
     
     positionVector1 = [0.5, 0.1, 0.4, 0.7];
@@ -195,7 +202,7 @@ ylabel('age groups')
 zlabel('Population(millions)')
 positionVector2 = [0.1, 0.2, 0.3, 0.3];;
 subplot('Position',positionVector2)
-x=[0.5 0.5]
+x=[0.5 0.5];
 
 pie(x)
 legend('Education','Healthcare')
@@ -209,7 +216,7 @@ ylabel('age groups')
 zlabel('Population(millions)')
 positionVector2 = [0.1, 0.2, 0.3, 0.3];;
 subplot('Position',positionVector2)
-x=[100]
+x=[100];
 
 pie(x)
 legend('Education')
@@ -223,7 +230,7 @@ ylabel('age groups')
 zlabel('Population(millions)')
 positionVector2 = [0.1, 0.2, 0.3, 0.3];;
 subplot('Position',positionVector2)
-x=[90 10]
+x=[90 10];
 
 pie(x)
 legend('Education','Healthcare')
@@ -237,7 +244,7 @@ ylabel('age groups')
 zlabel('Population(millions)')
 positionVector2 = [0.1, 0.2, 0.3, 0.3];;
 subplot('Position',positionVector2)
-x=[80 20]
+x=[80 20];
 
 pie(x)
 legend('Education','Healthcare')
@@ -251,7 +258,7 @@ ylabel('age groups')
 zlabel('Population(millions)')
 positionVector2 = [0.1, 0.2, 0.3, 0.3];;
 subplot('Position',positionVector2)
-x=[70 30]
+x=[70 30];
 
 pie(x)
 legend('Education','Healthcare')
@@ -265,7 +272,7 @@ ylabel('age groups')
 zlabel('Population(millions)')
 positionVector2 = [0.1, 0.2, 0.3, 0.3];;
 subplot('Position',positionVector2)
-x=[60 40]
+x=[60 40];
 
 pie(x)
 legend('Education','Healthcare')
@@ -279,7 +286,7 @@ ylabel('age groups')
 zlabel('Population(millions)')
 positionVector2 = [0.1, 0.2, 0.3, 0.3];;
 subplot('Position',positionVector2)
-x=[40 60]
+x=[40 60];
 
 pie(x)
 legend('Education','Healthcare')
@@ -293,7 +300,7 @@ ylabel('age groups')
 zlabel('Population(millions)')
 positionVector2 = [0.1, 0.2, 0.3, 0.3];;
 subplot('Position',positionVector2)
-x=[30 70]
+x=[30 70];
 
 pie(x)
 legend('Education','Healthcare')
@@ -307,7 +314,7 @@ ylabel('age groups')
 zlabel('Population(millions)')
 positionVector2 = [0.1, 0.2, 0.3, 0.3];;
 subplot('Position',positionVector2)
-x=[20 80]
+x=[20 80];
 
 pie(x)
 legend('Education','Healthcare')
@@ -321,7 +328,7 @@ ylabel('age groups')
 zlabel('Population(millions)')
 positionVector2 = [0.1, 0.2, 0.3, 0.3];;
 subplot('Position',positionVector2)
-x=[10 90]
+x=[10 90];
 
 pie(x)
 legend('Education','Healthcare')
@@ -335,7 +342,7 @@ ylabel('age groups')
 zlabel('Population(millions)')
 positionVector2 = [0.1, 0.2, 0.3, 0.3];;
 subplot('Position',positionVector2)
-x=[1]
+x=[1];
 
 pie(x)
 legend('Healthcare')
